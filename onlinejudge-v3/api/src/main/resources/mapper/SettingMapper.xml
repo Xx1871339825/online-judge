@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crowoj.api.dao.SettingDao">
+    <select id="getSettingList" resultType="com.crowoj.api.vo.SettingVO">
+        SELECT DISTINCT
+            s.*,u.nickname as nickname
+        FROM
+            setting AS s
+                LEFT JOIN `user` AS u ON u.uid = s.user_id
+        WHERE
+            (u.nickname LIKE concat('%',#{search},'%') OR
+            s.title LIKE concat('%',#{search},'%'))
+        <if test="type != null">
+            and s.setting_type = #{type}
+        </if>
+        <if test="status != -1">
+            and s.status = #{status}
+        </if>
+        order by s.sort DESC
+    </select>
+</mapper>

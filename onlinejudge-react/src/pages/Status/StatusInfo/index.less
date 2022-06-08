@@ -1,0 +1,46 @@
+@import "src/var";
+.statusInfo{
+  margin: 20px 10px;
+  height: 100%;
+  border-radius: 10px;
+  overflow-x: auto;
+  .caseBox{
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 10px;
+    .title{
+      padding-left: 20px;
+      height: 60px;
+      line-height: 60px;
+      font-size: 1.5em;
+      font-weight: normal;
+      color: #409EFF;
+      border-bottom: 1px solid @lineGrey;
+    }
+    .caseItemBox{
+      padding: 20px;
+      display: flex;
+      flex-wrap:wrap;
+      flex-direction: row;
+      .caseItem{
+        padding: 10px;
+        margin: 10px;
+        width: 240px;
+        height: 120px;
+        border: 1px solid;
+        border-left: 3px solid;
+        border-radius: 5px;
+        .statusStr{
+          text-align: center;
+          font-size: 1.5em;
+          font-weight: bold;
+        }
+        .timeAndMemory{
+          text-align: center;
+        }
+      }
+    }
+
+
+  }
+}

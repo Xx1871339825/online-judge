@@ -1,0 +1,67 @@
+@import "src/var";
+.mini-navbar{
+  min-width: 130px;
+  .logo{
+    color: @mainColor;
+    width: fit-content;
+    height: fit-content;
+    font-size: 2em;
+    margin: 0 auto;
+  }
+  .avatar{
+    width: 100%;
+    height: fit-content;
+  }
+}
+.ant-drawer-header{
+  background-color: @mainColor;
+  border-bottom:none !important;
+}
+.drawer-header{
+  font-family: "titleFont", sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+}
+.ant-drawer-body{
+  padding: 0;
+  background-color: @secondaryColor;
+  overflow: hidden;
+  .menu{
+    background-color: @secondaryColor !important;
+    border-right: none;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .ant-menu-item-selected a{
+    color: @mainColor;
+  }
+  .ant-menu-item a:hover{
+    color: @mainColor;
+  }
+  a{
+    color: white;
+  }
+
+  .ant-menu-inline .ant-menu-item::after{
+    border-right: 3px solid @mainColor !important;
+  }
+  .ant-menu-light .ant-menu-item:hover, .ant-menu-light .ant-menu-item-active {
+    color: @mainColor !important;
+  }
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: transparent;
+  }
+  .ant-menu-item-selected {
+    color: @mainColor;
+  }
+  .ant-menu-item:focus{
+    background-color: @secondaryColor;
+  }
+  .ant-menu-item-only-child:focus{
+    background-color: @secondaryColor;
+  }
+  .ant-menu-item-active{
+    background-color: @secondaryColor;
+  }
+}

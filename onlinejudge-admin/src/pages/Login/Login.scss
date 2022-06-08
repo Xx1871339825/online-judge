@@ -1,0 +1,17 @@
+@import "src/assets/css/const";
+.wrap{
+    height: 100vh;
+    width: 100vw;
+    background-color: $bgColor;
+  }
+  .loginBox{
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    border: 1px solid $lineGrey;
+    border-radius: 40px;
+    width: 400px;
+    height: 230px;
+    margin: 0 auto;
+    top: calc( (100vh - 230px) / 2);
+  }

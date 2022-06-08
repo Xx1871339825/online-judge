@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crowoj.api.dao.MenuDao">
+    <select id="findMenuByUid" resultType="com.crowoj.api.entity.Menu">
+        SELECT
+            m.*
+        FROM
+            menu AS m,
+            admin_user AS au,
+            admin_user_role AS aur,
+            `user` AS u,
+            role AS r,
+            role_menu AS rm
+        WHERE
+            u.uid = #{uid}
+          AND u.uid = au.uid
+          AND r.rid = aur.rid
+          AND r.rid = rm.rid
+          AND m.mid = rm.mid
+          AND au.admin_id = aur.admin_id
+          AND m.status = 0
+    </select>
+    <select id="findMenuByRid" resultType="com.crowoj.api.entity.Menu">
+        SELECT DISTINCT
+            m.*
+        FROM
+            menu AS m,
+            role AS r,
+            role_menu AS rm
+        WHERE
+            m.mid = rm.mid
+          AND r.rid = rm.rid
+          AND r.rid = #{rid}
+          AND m.status = 0
+    </select>
+</mapper>

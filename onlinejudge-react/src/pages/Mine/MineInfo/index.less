@@ -1,0 +1,52 @@
+@import "src/var";
+.mineInfo{
+  width: 50%;
+  margin: 20px auto;
+  padding: 10px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: white;
+  .avatarBox{
+    width: fit-content;
+    margin: 0 auto;
+    .avatar-uploader > .ant-upload {
+      width: 180px;
+      height: 180px;
+    }
+  }
+  .titleBox{
+    border-top: 1px solid @lineGrey;
+    font-weight: bold;
+    height: 50px;
+    font-size: 1.5em;
+    line-height: 50px;
+    border-bottom: 1px solid @lineGrey;
+  }
+
+  .mineInfoBox{
+    padding: 10px;
+    .infoBox{
+      .item{
+        margin-top: 20px;
+      }
+      .updateBtn{
+        width: fit-content;
+        height: fit-content;
+        margin: 20px auto;
+      }
+    }
+  }
+  .authBox{
+    padding: 10px;
+    .authItem{
+      border-bottom: 1px solid @lineGrey;
+      height: 50px;
+      line-height: 50px;
+    }
+  }
+}
+@media screen and (max-width: 780px){
+  .mineInfo{
+    width: 100%;
+  }
+}

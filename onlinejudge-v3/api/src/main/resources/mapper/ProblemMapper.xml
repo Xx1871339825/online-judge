@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crowoj.api.dao.ProblemDao">
+
+    <select id="getProblemList" resultType="com.crowoj.api.dto.ProblemDTO">
+        SELECT DISTINCT
+            p.*,
+            IFNULL( us.`status`,- 1 ) AS isAc,
+            u.nickname AS nickname,
+            GROUP_CONCAT( t.tag_name ) AS tag
+        FROM
+            problem AS p
+                LEFT JOIN ( problem_tag AS pt, tag AS t ) ON pt.problem_id = p.pid
+                AND pt.tag_id = t.tid
+                LEFT JOIN user_submit AS us ON p.pid = us.problem_id
+                AND us.user_id = #{uid}
+                AND us.`status` = 0
+                and us.submit_type = 0
+                LEFT JOIN `user` AS u ON u.uid = p.uid
+        WHERE
+            (p.pid LIKE concat('%',#{search},'%') OR
+             p.title LIKE concat('%',#{search},'%') OR
+             p.description LIKE concat('%',#{search},'%') OR
+             t.tag_name LIKE concat('%',#{search},'%') OR
+             u.nickname LIKE CONCAT('%',#{search},'%')
+                )
+        <if test="problemType != null">
+            AND p.problem_type = #{problemType}
+        </if>
+
+        GROUP BY p.pid
+    </select>
+    
+    <select id="getProblemVO" resultType="com.crowoj.api.dto.ProblemDTO">
+        SELECT
+            p.*,
+            IFNULL(favorite.uid,-1) AS isFavorite,
+            GROUP_CONCAT( t.tag_name ) AS tag
+        FROM
+            problem AS p
+                LEFT JOIN favorite  ON favorite.pid = p.pid AND favorite.uid = #{uid}
+                LEFT JOIN ( problem_tag AS pt, tag AS t ) ON p.pid = pt.problem_id
+                AND pt.tag_id = t.tid
+        WHERE
+            p.pid = #{pid}
+            AND p.problem_type = 0
+        GROUP BY
+            p.pid
+    </select>
+
+
+
+
+
+
+</mapper>

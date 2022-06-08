@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crowoj.api.dao.CompetitionDao">
+    <select id="search" resultType="com.crowoj.api.dto.CompetitionDTO">
+        SELECT c.*,u.nickname AS nickname
+        FROM competition AS c,`user` AS u
+        <if test="uid != -1">
+            ,competition_register AS cr
+        </if>
+        WHERE c.uid = u.uid
+          AND (
+                    c.title LIKE CONCAT('%',#{search},'%') OR
+                    u.nickname LIKE CONCAT('%',#{search},'%')
+            )
+        <if test="status == 0">
+            and c.start_time > current_timestamp
+        </if>
+        <if test="status == 1">
+            and current_timestamp > c.start_time
+            and c.end_time > current_timestamp
+        </if>
+        <if test="status == 2">
+            and current_timestamp > c.end_time
+        </if>
+        <if test="type != -1">
+            and c.auth = #{type}
+        </if>
+        <if test="uid != -1">
+            AND cr.cid = c.id
+            AND cr.uid = #{uid}
+        </if>
+        ORDER BY c.start_time DESC
+    </select>
+
+    <select id="getProblemListByCid" resultType="com.crowoj.api.dto.ProblemDTO">
+        SELECT DISTINCT
+            p.pid,
+            p.uid,
+            p.title,
+            p.`level`,
+            p.description,
+            p.time_limit,
+            p.memory_limit,
+            p.problem_type,
+            (SELECT COUNT(us.id) FROM user_submit AS us WHERE us.problem_id = p.pid AND us.submit_type = 1) AS try_count,
+            (SELECT COUNT(us.id) FROM user_submit AS us WHERE us.problem_id = p.pid AND us.submit_type = 1 AND us.`status` = 0) AS accepted_count,
+            IFNULL( us.`status`,-1 ) AS is_ac
+        FROM
+            problem AS p
+                LEFT JOIN user_submit AS us ON p.pid = us.problem_id
+                AND us.user_id = #{uid}
+                AND us.`status` = 0
+                AND us.submit_type = 1
+                and us.cid = #{cid},
+            competition_problem AS cp,
+            competition as c
+        WHERE
+            p.pid = cp.pid
+          AND
+            cp.cid = #{cid}
+          And
+            c.id = cp.cid
+    </select>
+
+    <select id="getCinfoDTO" resultType="com.crowoj.api.dto.CinfoDTO">
+        SELECT
+            c.*,
+            COUNT( cr.cid ) AS register_count,
+            IFNULL(cr1.uid,-1) AS is_register
+        FROM
+            competition AS c
+                LEFT JOIN competition_register AS cr ON c.id = cr.cid
+                LEFT JOIN competition_register AS cr1 ON c.id = cr1.cid
+                AND cr1.uid = #{uid}
+        WHERE
+            c.id = #{cid}
+    </select>
+</mapper>

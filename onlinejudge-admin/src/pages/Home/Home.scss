@@ -1,0 +1,46 @@
+@import "src/assets/css/const";
+.layout-container-demo{
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
+  .el-header {
+    width: 100%;
+    height: 6vh;
+    z-index: 99;
+    background-color: $secondaryColor;
+    color: $mainColor;
+    text-align: center;
+    line-height: 6vh;
+    font-max-size: 1.5em;
+  }
+  .el-aside {
+    height: 94vh;
+    width: fit-content;
+    color: var(--el-text-color-primary);
+    background: #fff !important;
+    border-right: solid 1px #e6e6e6;
+    box-sizing: border-box;
+  }
+  .el-menu {
+    border-right: none;
+  }
+  .el-main {
+    padding: 10px;
+  }
+  .toolbar {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+  }
+  .collapseBtn{
+    line-height: 40px;
+    font-size: 1.5em;
+    height: 40px;
+    text-align: center;
+    background-color: #fcaf17;
+  }
+}

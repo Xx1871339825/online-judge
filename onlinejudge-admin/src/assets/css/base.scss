@@ -1,0 +1,8 @@
+@import "normalize.css";
+@font-face {
+  font-family: titleFont;
+  src: url("../fonts/GoodMorning.ttf");
+}
+.wordArt{
+  font-family: titleFont, serif;
+}

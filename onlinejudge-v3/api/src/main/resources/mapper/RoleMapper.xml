@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crowoj.api.dao.RoleDao">
+    <select id="findRoleByUid" resultType="com.crowoj.api.entity.Role">
+        SELECT
+            r.*
+        FROM
+            role AS r,
+            `user` AS u,
+            admin_user AS au,
+            admin_user_role AS aur
+        WHERE
+            u.uid = au.uid
+          AND aur.admin_id = au.admin_id
+          AND u.uid = #{uid}
+          AND r.status = 0
+    </select>
+
+</mapper>

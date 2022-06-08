@@ -1,0 +1,83 @@
+@import "src/var";
+
+.cardClass{
+  margin: 10px auto;
+  width: 70%;
+  border-radius: 20px;
+}
+
+.home{
+  margin-top: 10px;
+  .search{
+    text-align: center;
+    border-bottom: @lineGrey 1px solid;
+  }
+  .searchBox{
+    width: 60%;
+    margin: 0 auto 10px;
+  }
+  .pWrap{
+    margin-top: 10px;
+    .pagination{
+      margin: 0 auto;
+      width: 50%;
+    }
+  }
+  .title{
+    margin: 0 auto;
+    text-align: center;
+  }
+  .banner{
+    width: 60vw;
+    //min-width: 350px;
+    max-width: 800px;
+    height: 35vh;
+    margin: 0 auto;
+    border-radius: 10px;
+    .slick-list{
+      border-radius: 10px;
+    }
+    .banner-item{
+      width: 100%;
+      height: 35vh;
+      background-color: @secondaryColor;
+      .ant-image{
+        width: 100%;
+        height: 100%;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .tabBox{
+    overflow-x: auto;
+    margin: 20px auto;
+  }
+
+
+  @media screen and (max-width: 375px){
+    .banner{
+      width: 60vw;
+      //min-width: 280px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+  @media screen and (max-width: 280px){
+    .banner{
+      width: 60vw;
+      //min-width: 250px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .cardClass{
+    width: 100%;
+  }
+}

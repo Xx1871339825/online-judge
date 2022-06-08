@@ -1,0 +1,36 @@
+.statusInfoHeader{
+  width: 100%;
+  height: fit-content;
+
+  overflow: hidden;
+  border-radius: 10px;
+  .iconBox{
+    line-height: 100px;
+    color: white;
+    width: 80px;
+    text-align: center;
+    font-size: 50px;
+    float: left;
+  }
+  .statusBox{
+    height: 100%;
+    h2.ant-typography{
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+    line-height: 50px;
+    padding-left: 10px;
+    float: right;
+    width: calc(100% - 80px);
+    .info{
+      overflow-x: auto;
+      color: white;
+      a{
+        color: white;
+      }
+      a:hover{
+        color: #409EFF;
+      }
+    }
+  }
+}

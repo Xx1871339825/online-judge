@@ -1,0 +1,71 @@
+@import "src/var";
+.problemInfo{
+  margin: 20px 10px;
+  padding: 20px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: white;
+  .descriptionBox{
+    border-top: @lineGrey 1px solid;
+    overflow: hidden;
+    width: 100%;
+    .left{
+      float: left;
+      width: 75%;
+      padding: 10px;
+      .p{
+        font-size: 1.2em;
+        font-weight: 450;
+        line-height: 1.5em;
+      }
+    }
+    .right{
+      float: right;
+      width: 25%;
+      border-left: @lineGrey 1px solid;
+      .infoItem{
+        font-size: 1.2em;
+        font-weight: 450;
+        line-height: 50px;
+        border-top: 1px solid @lineGrey;
+        span{
+          margin-left: 10px;
+        }
+      }
+      .bgColor{
+        background-color: #F9F9F9;
+      }
+    }
+    @media screen and (max-width: 780px){
+      .left{
+        width: 100%;
+      }
+      .right{
+        display: none;
+      }
+    }
+  }
+  .codeBar{
+    margin-top: 10px;
+    background-color: #F8F9FA;
+    border: 1px solid @lineGrey;
+    border-bottom: none;
+    height: 60px;
+    position: relative;
+    .codeSelect{
+      padding: 0 10px;
+      float: right;
+      position: relative;
+      top: 25%;
+      width: fit-content;
+      height: fit-content;
+    }
+  }
+  .codeEditor{
+    border: 1px solid @lineGrey;
+  }
+  .submitBox{
+    padding-top: 10px;
+    overflow: hidden;
+  }
+}

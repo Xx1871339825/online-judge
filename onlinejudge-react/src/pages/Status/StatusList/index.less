@@ -1,0 +1,35 @@
+@import "src/var";
+.statusList{
+  margin: 20px 10px;
+  padding: 20px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: white;
+  .topBarBox{
+    width: fit-content;
+    margin: 0 auto;
+    border-bottom: 1px solid @lineGrey;
+    .topBar{
+      display: flex;
+      flex-wrap:wrap;
+      flex-direction: row;
+      .tbText{
+        margin-right: 10px;
+        line-height: 50px;
+        width: 100px;
+      }
+    }
+  }
+  .statusTable{
+    overflow-x: auto;
+  }
+  .pWrap{
+    margin-top: 10px;
+    .pagination{
+      margin: 0 auto;
+      width: 50%;
+    }
+  }
+
+
+}

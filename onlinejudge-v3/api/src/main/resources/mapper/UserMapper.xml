@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crowoj.api.dao.UserDao">
+
+    <select id="getUserAllInfoDTO" resultType="com.crowoj.api.dto.UserAllInfoDTO">
+        SELECT
+            u.*,
+            ua1.identifier AS email,
+            ua2.identifier AS account,
+            temp.admin_id,
+            GROUP_CONCAT( temp.role_name ) AS role_name,
+            GROUP_CONCAT( temp.rid ) AS rid
+        FROM
+            user_auths AS ua1,
+            user_auths AS ua2,
+            `user` AS u
+                LEFT JOIN (
+                SELECT
+                    r.*,
+                    au.*
+                FROM
+                    admin_user AS au,
+                    role AS r,
+                    admin_user_role AS aur
+                WHERE
+                    au.admin_id = aur.admin_id
+                  AND aur.rid = r.rid
+            ) AS temp ON temp.uid = u.uid
+                AND temp.status = 0
+        WHERE
+            u.uid = ua1.uid
+          AND ua1.identity_type = 1
+          AND u.uid = ua2.uid
+          AND ua2.identity_type = 2
+          AND (
+                    u.uid like concat('%',#{search},'%') or
+                    u.nickname like concat('%',#{search},'%') or
+                    ua1.identifier LIKE concat('%',#{search},'%') or
+                    ua2.identifier LIKE concat('%',#{search},'%')
+            )
+        <if test="banFlag != null">
+            and u.ban_flag = #{banFlag}
+        </if>
+        GROUP BY u.uid
+    </select>
+<!--    <select id="getUserAllInfoList" resultType="com.crowoj.api.dto.UserAllInfoDTO">-->
+<!--        SELECT-->
+<!--            u.*,-->
+<!--            ua1.identifier AS email,-->
+<!--            ua2.identifier AS account,-->
+<!--            GROUP_CONCAT( temp.role_name ) AS role_name,-->
+<!--            GROUP_CONCAT( temp.rid ) AS rid-->
+<!--        FROM-->
+<!--            user_auths AS ua1,-->
+<!--            user_auths AS ua2,-->
+<!--            `user` AS u-->
+<!--                LEFT JOIN (-->
+<!--                SELECT-->
+<!--                    r.*,-->
+<!--                    au.*-->
+<!--                FROM-->
+<!--                    admin_user AS au,-->
+<!--                    role AS r,-->
+<!--                    admin_user_role AS aur-->
+<!--                WHERE-->
+<!--                    au.admin_id = aur.admin_id-->
+<!--                  AND aur.rid = r.rid-->
+<!--            ) AS temp ON temp.uid = u.uid-->
+<!--                AND temp.status = 0-->
+<!--        WHERE-->
+<!--            u.uid = ua1.uid-->
+<!--          AND ua1.identity_type = 1-->
+<!--          AND u.uid = ua2.uid-->
+<!--          AND ua2.identity_type = 2-->
+<!--          AND (-->
+<!--              u.uid like concat('%',#{search},'%') or-->
+<!--              u.nickname like concat('%',#{search},'%')-->
+<!--              )-->
+<!--    </select>-->
+
+    <select id="getUserByRid" resultType="com.crowoj.api.entity.User">
+        SELECT u.*
+        FROM `user` AS u, admin_user AS au,admin_user_role AS aur,role AS r
+        WHERE u.uid = au.uid AND au.admin_id = aur.admin_id AND r.rid = aur.rid
+          AND r.rid = #{rid}
+          and (
+              u.
+            )
+    </select>
+
+
+    <select id="getUserInfoDtoByUid" resultType="com.crowoj.api.dto.UserInfoDTO">
+        SELECT
+            u.*,
+            COUNT( DISTINCT us1.id ) AS wa_count,
+            COUNT( DISTINCT us2.id ) AS na_ac_count,
+            COUNT( DISTINCT us3.id ) AS re_count,
+            COUNT( DISTINCT us4.id ) AS ce_count,
+            COUNT( DISTINCT us5.id ) AS tle_count,
+            COUNT( DISTINCT us5.id ) AS mle_count
+        FROM
+            `user` AS u
+                LEFT JOIN user_submit AS us1 ON us1.user_id = u.uid
+                AND us1.`status` = 1 and us1.submit_type = 0
+                LEFT JOIN user_submit AS us2 ON us2.user_id = u.uid
+                AND us2.`status` = 2 and us2.submit_type = 0
+                LEFT JOIN user_submit AS us3 ON us3.user_id = u.uid
+                AND us3.`status` = 3 and us3.submit_type = 0
+                LEFT JOIN user_submit AS us4 ON us4.user_id = u.uid
+                AND us4.`status` = 9 and us4.submit_type = 0
+                LEFT JOIN user_submit AS us5 ON us5.user_id = u.uid
+                AND us5.`status` = 4 and us5.submit_type = 0
+                LEFT JOIN user_submit AS us6 ON us6.user_id = u.uid
+                AND us6.`status` = 5 and us6.submit_type = 0
+        WHERE
+            u.uid = #{uid}
+    </select>
+
+</mapper>

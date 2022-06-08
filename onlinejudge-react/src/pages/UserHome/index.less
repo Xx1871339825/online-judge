@@ -1,0 +1,85 @@
+@import "src/var";
+.userHome{
+  margin: 20px 10px;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid @mainColor;
+  background-color: white;
+  .titleBox{
+    border-radius: 5px 5px 0 0;
+    background-color: @mainColor;
+    color: white;
+    font-size: 1.2em;
+    padding: 10px;
+  }
+  .userInfo{
+    border-radius: 10px;
+    background-color: white;
+
+    .avatarBox{
+      text-align: center;
+      width: 100%;
+      .avatarImage{
+        padding-top: 35px;
+        margin: 0 auto;
+        height: fit-content;
+        width: fit-content;
+      }
+    }
+    .infoBox{
+      width: 80%;
+      margin: 20px auto;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      overflow-x: auto;
+      .submitStatus{
+        min-width: 300px;
+        width: 50%;
+      }
+      .itemBox{
+        width: 50%;
+        min-width: 300px;
+        .infoItem{
+          padding: 10px;
+          line-height: 30px;
+          font-size: 1.2em;
+          overflow: hidden;
+          border-bottom: 1px solid @lineGrey;
+          border-radius: 10px;
+          .left{
+            float: left;
+          }
+          .right{
+            float: right;
+          }
+        }
+      }
+    }
+  }
+  .acBox{
+    .tagBox{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+    .tagItem{
+      margin: 10px;
+      height: 40px;
+      width: 80px;
+      text-align: center;
+      line-height: 40px;
+      font-size: 1.5em;
+      font-weight: 400;
+      color: white;
+      border-radius: 10px;
+      background-color: #19BE6B;
+
+    }
+
+  }
+
+
+}
