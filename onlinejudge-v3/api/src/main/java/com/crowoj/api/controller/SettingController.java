@@ -27,6 +27,7 @@ public class SettingController {
 
     @GetMapping("banner")
     public ResultVO<List<Setting>> getBannerList(){
+        // 测试修改
         return ResultUtil.success(settingService.findBySettingType(SettingType.BANNER));
     }
 
