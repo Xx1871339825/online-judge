@@ -38,6 +38,7 @@ public class UploadController {
     private final static String PREFIX = "http://127.0.0.1:8080/static";
     @PostMapping("avatar")
     public ResultVO<User> uploadAvatar(MultipartFile avatar){
+        // 简易的上传头像接口
         var activityUser = (ActivityUser) SecurityUtils.getSubject().getPrincipal();
         if (avatar.isEmpty()){
             throw new SimpleException(ResultEnum.BAD_REQUEST_FILE_IS_EMPTY);
